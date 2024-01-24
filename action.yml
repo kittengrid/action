@@ -1,0 +1,7 @@
+name: 'Kittengrid'
+description: 'Runs kittengrid agent'
+runs:
+  using: "composite"
+  steps:
+    - run: main.sh
+      shell: bash
