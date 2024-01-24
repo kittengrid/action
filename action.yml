@@ -3,5 +3,5 @@ description: 'Runs kittengrid agent'
 runs:
   using: "composite"
   steps:
-    - run: ${{ github.action_path }}/main.sh "pr-${{ github.event_name }}-${{ github.event.issue.number }}"
+    - run: ${{ github.action_path }}/main.sh "pr-${{ github.event_name }}-${{ github.event.number }}"
       shell: bash
