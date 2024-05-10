@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+set -e
+set -x
+
 export KG_API_KEY=$KITTENGRID_API_KEY
 export KG_API_URL="https://kittengrid.com"
 export KG_VCS_PROVIDER="github"
