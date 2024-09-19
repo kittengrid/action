@@ -29,10 +29,16 @@ export KITTENGRID_BIND_ADDRESS="0.0.0.0"
 export KITTENGRID_WORKFLOW_ID=$GITHUB_RUN_ID
 
 if [ -z $KITTENGRID_API_URL ]; then
-  export KITTENGRID_API_URL="https://kittengrid.com"
+    export KITTENGRID_API_URL="https://kittengrid.com"
 fi
 
+if [[ "${GITHUB_TRIGGERING_ACTOR}" = *"[bot]" ]]; then
+    export KITTENGRID_START_SERVICES=true
+fi
+
+env
 mkdir -p /tmp/kittengrid/bin
+rm -f /tmp/kittengrid/bin/kittengrid-agent
 wget https://releases.kittengrid.com/kittengrid-agent/0.0.1/kittengrid-agent_0.0.1_linux_amd64.zip -O /tmp/kittengrid-agent.zip
 unzip /tmp/kittengrid-agent.zip -d /tmp/kittengrid/bin
 
