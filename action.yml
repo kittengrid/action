@@ -6,6 +6,6 @@ runs:
     - name: Setup Environment (PR)
       if: ${{ github.event_name == 'pull_request' }}
       shell: bash
-      run: echo "LAST_COMMIT_SHA=${{ github.event.pull_request.head.sha }}" >> ${GITHUB_ENV}
+      run: echo "KITTENGRID_LAST_COMMIT_SHA=${{ github.event.pull_request.head.sha }}" >> ${GITHUB_ENV}
     - run: ${{ github.action_path }}/main.sh --pull-request "${{ github.event.number }}" --repo "${{ github.repository }}"
       shell: bash
