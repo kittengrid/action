@@ -2,7 +2,7 @@
 
 export KITTENGRID_VCS_PROVIDER="github"
 export KITTENGRID_VCS_ID="$1"
-export KITTENGRID_WORKFLOW_ID=$GITHUB_RUN_ID
+export KITTENGRID_WORKFLOW_RUN_ID=$GITHUB_RUN_ID
 export KITTENGRID_API_URL="https://kittengrid.com"
 
 mkdir -p /tmp/kittengrid/bin
