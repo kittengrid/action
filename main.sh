@@ -29,7 +29,7 @@ export KITTENGRID_BIND_ADDRESS="0.0.0.0"
 export KITTENGRID_WORKFLOW_ID=$GITHUB_RUN_ID
 
 if [ -z $KITTENGRID_API_URL ]; then
-    export KITTENGRID_API_URL="https://kittengrid.com"
+    export KITTENGRID_API_URL="https://app.kittengrid.com"
 fi
 
 if [[ "${GITHUB_TRIGGERING_ACTOR}" = *"[bot]" ]]; then
