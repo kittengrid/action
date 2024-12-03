@@ -11,8 +11,8 @@ jobs:
       - id: kittengrid-action
         uses: ./
         env:
-          KITTENGRID_API_KEY: ${{ secrets.KITTENGRID_API_KEY }}
-        #   KITTENGRID_API_URL: https://app.magec.kittengrid.com/
+          KITTENGRID_API_KEY: ${{ secrets.KITTENGRID_MORANTRON_API_KEY }}
+          KITTENGRID_API_URL: https://app.morantron.kittengrid.com/
   # morantron-test:
   #   runs-on: ubuntu-latest
   #   permissions:
