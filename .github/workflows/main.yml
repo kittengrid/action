@@ -1,7 +1,7 @@
 name: test-workflow
 on: pull_request
 jobs:
-  magec-test:
+  morantron-test:
     runs-on: ubuntu-latest
     permissions:
       actions: write
