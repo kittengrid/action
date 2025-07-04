@@ -1,25 +1,27 @@
 #!/usr/bin/env bash
+AGENT_VERSION=0.0.4
 
 for i in "$@"; do
-  case $i in
+    case $i in
     --repo)
-      PROJECT_VCS_ID=$2
-      shift 2
-      ;;
+        PROJECT_VCS_ID=$2
+        shift 2
+        ;;
     --pull-request)
-      PULL_REQUEST_VCS_ID=$2
-      shift 2
-  esac
+        PULL_REQUEST_VCS_ID=$2
+        shift 2
+        ;;
+    esac
 done
 
 if [ -z $PULL_REQUEST_VCS_ID ]; then
-  echo "Missing argument: --pull-request-vcs-id"
-  exit 1;
+    echo "Missing argument: --pull-request-vcs-id"
+    exit 1
 fi
 
 if [ -z $PROJECT_VCS_ID ]; then
-  echo "Missing argument: --project-vcs-id"
-  exit 1;
+    echo "Missing argument: --project-vcs-id"
+    exit 1
 fi
 
 export KITTENGRID_VCS_PROVIDER="github"
@@ -39,7 +41,18 @@ fi
 env
 mkdir -p /tmp/kittengrid/bin
 rm -f /tmp/kittengrid/bin/kittengrid-agent
-wget https://releases.kittengrid.com/kittengrid-agent/0.0.1/kittengrid-agent_0.0.1_linux_amd64.zip -O /tmp/kittengrid-agent.zip
-unzip /tmp/kittengrid-agent.zip -d /tmp/kittengrid/bin
 
+ARCH=$(uname -m)
+case $ARCH in
+x86_64)
+    wget https://github.com/kittengrid/agent/releases/download/v${AGENT_VERSION}/kittengrid-agent-linux-amd64.tar.gz -O /tmp/kittengrid-agent.zip
+    ;;
+arm64 | aarch64)
+    wget https://github.com/kittengrid/agent/releases/download/v${AGENT_VERSION}/kittengrid-agent-linux-arm64.tar.gz -O /tmp/kittengrid-agent.zip
+    ;;
+*)
+    echo "Unsupported architecture: $ARCH"
+    ;;
+esac
+unzip /tmp/kittengrid-agent.zip -d /tmp/kittengrid/bin
 sudo -E /tmp/kittengrid/bin/kittengrid-agent
