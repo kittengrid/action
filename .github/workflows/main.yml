@@ -9,10 +9,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - id: kittengrid-action
+        if: ${{ !cancelled() }}
         uses: ./
         env:
           KITTENGRID_API_KEY: ${{ secrets.KITTENGRID_API_KEY }}
-        #   KITTENGRID_API_URL: https://app.magec.kittengrid.com/
+#          KITTENGRID_API_KEY: ${{ secrets.KITTENGRID_MAGEC_API_KEY }}
+#          KITTENGRID_API_URL: https://app.kittengrid.com
   # morantron-test:
   #   runs-on: ubuntu-latest
   #   permissions:
