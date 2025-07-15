@@ -45,14 +45,14 @@ rm -f /tmp/kittengrid/bin/kittengrid-agent
 ARCH=$(uname -m)
 case $ARCH in
 x86_64)
-    wget https://github.com/kittengrid/agent/releases/download/v${AGENT_VERSION}/kittengrid-agent-linux-amd64.tar.gz -O /tmp/kittengrid-agent.zip
+    wget https://github.com/kittengrid/agent/releases/download/v${AGENT_VERSION}/kittengrid-agent-linux-amd64.tar.gz -O /tmp/kittengrid-agent.tar.gz
     ;;
 arm64 | aarch64)
-    wget https://github.com/kittengrid/agent/releases/download/v${AGENT_VERSION}/kittengrid-agent-linux-arm64.tar.gz -O /tmp/kittengrid-agent.zip
+    wget https://github.com/kittengrid/agent/releases/download/v${AGENT_VERSION}/kittengrid-agent-linux-arm64.tar.gz -O /tmp/kittengrid-agent.tar.gz
     ;;
 *)
     echo "Unsupported architecture: $ARCH"
     ;;
 esac
-unzip /tmp/kittengrid-agent.zip -d /tmp/kittengrid/bin
-sudo -E /tmp/kittengrid/bin/kittengrid-agent
+tar xvzf /tmp/kittengrid-agent.tar.gz -C /tmp/
+sudo -E /tmp/kittengrid-agent
