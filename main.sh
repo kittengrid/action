@@ -56,4 +56,5 @@ arm64 | aarch64)
     ;;
 esac
 tar xvzf /tmp/kittengrid-agent.tar.gz -C /tmp/
-sudo -E /tmp/kittengrid-agent
+env >/tmp/vars
+sudo -E bash -c "source /tmp/vars && /tmp/kittengrid-agent"
