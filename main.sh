@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-AGENT_VERSION=0.0.5
+AGENT_VERSION=0.0.6
 
 for i in "$@"; do
     case $i in
@@ -29,6 +29,7 @@ export KITTENGRID_PROJECT_VCS_ID="$PROJECT_VCS_ID"
 export KITTENGRID_PULL_REQUEST_VCS_ID="$PULL_REQUEST_VCS_ID"
 export KITTENGRID_BIND_ADDRESS="0.0.0.0"
 export KITTENGRID_WORKFLOW_RUN_ID=$GITHUB_RUN_ID
+export KITTENGRID_SHOW_SERVICES_OUTPUT=true
 
 if [ -z $KITTENGRID_API_URL ]; then
     export KITTENGRID_API_URL="https://app.kittengrid.com"
