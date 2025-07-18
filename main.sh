@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-AGENT_VERSION=0.0.7
+AGENT_VERSION=0.0.8
 
 for i in "$@"; do
     case $i in
