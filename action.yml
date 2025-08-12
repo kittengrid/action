@@ -1,12 +1,23 @@
 name: 'Kittengrid'
 description: 'Runs kittengrid agent'
+
+# Add your action's branding here. This will appear on the GitHub Marketplace.
+branding:
+  icon: heart
+  color: red
+
+# Define your inputs here.
+inputs:
+  milliseconds:
+    description: Your input description here
+    required: true
+    default: '1000'
+
+# Define your outputs here.
+outputs:
+  time:
+    description: Your output description here
+
 runs:
-  using: "composite"
-  steps:
-    - name: Setup Environment (PR)
-      if: ${{ github.event_name == 'pull_request' }}
-      run: echo "KITTENGRID_LAST_COMMIT_SHA=${{ github.event.pull_request.head.sha }}" >> ${GITHUB_ENV}
-      shell: /usr/bin/bash -e {0}
-    - if: ${{ !cancelled() }}
-      run: ${{ github.action_path }}/main.sh --pull-request "${{ github.event.number }}" --repo "${{ github.repository }}"
-      shell: /usr/bin/bash -e {0}
+  using: node24
+  main: dist/index.js
