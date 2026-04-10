@@ -1,12 +1,27 @@
 name: 'Kittengrid'
 description: 'Runs kittengrid agent'
+inputs:
+  pull_request_number:
+    description: 'PR number (required when triggered via workflow_dispatch)'
+    required: false
+  pull_request_head_sha:
+    description: 'PR head SHA (required when triggered via workflow_dispatch)'
+    required: false
 runs:
   using: "composite"
   steps:
-    - name: Setup Environment (PR)
+    - name: Setup Environment (pull_request)
       if: ${{ github.event_name == 'pull_request' }}
-      run: echo "KITTENGRID_LAST_COMMIT_SHA=${{ github.event.pull_request.head.sha }}" >> ${GITHUB_ENV}
+      run: |
+        echo "KITTENGRID_LAST_COMMIT_SHA=${{ github.event.pull_request.head.sha }}" >> ${GITHUB_ENV}
+        echo "KITTENGRID_PR_NUMBER=${{ github.event.number }}" >> ${GITHUB_ENV}
+      shell: /usr/bin/bash -e {0}
+    - name: Setup Environment (workflow_dispatch)
+      if: ${{ github.event_name == 'workflow_dispatch' }}
+      run: |
+        echo "KITTENGRID_LAST_COMMIT_SHA=${{ inputs.pull_request_head_sha }}" >> ${GITHUB_ENV}
+        echo "KITTENGRID_PR_NUMBER=${{ inputs.pull_request_number }}" >> ${GITHUB_ENV}
       shell: /usr/bin/bash -e {0}
     - if: ${{ !cancelled() }}
-      run: ${{ github.action_path }}/main.sh --pull-request "${{ github.event.number }}" --repo "${{ github.repository }}"
+      run: ${{ github.action_path }}/main.sh --pull-request "${KITTENGRID_PR_NUMBER}" --repo "${{ github.repository }}"
       shell: /usr/bin/bash -e {0}
